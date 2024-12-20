@@ -7,10 +7,11 @@ function Register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [avatar, setAvatar] = useState(null)
+  const [error, setError] = useState()
 
 
 
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const formData = new FormData()
@@ -28,11 +29,23 @@ function Register() {
         //   'Content-Type': 'multipart/form-data',
         // }
       })
-      const data = await response.json()
+      
+      if (!response.ok) {
 
-      console.log(data)
+        const errorData = await response.json()
+         setError(errorData.message)
+
+      }
+      if(response.status ===201 || response.status ===200){
+        alert("Registartion Successfull")
+      }else{
+        alert("Registration failed")
+      }
+      
+
     } catch (error) {
-      console.log("error", error)
+      console.log(error)
+      setError(error)
 
     }
   }
@@ -41,6 +54,8 @@ function Register() {
     const file = e.target.files[0]
     setAvatar(file)
   }
+
+
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -110,6 +125,8 @@ function Register() {
             Submit
           </button>
         </form>
+        {/* Display error message */}
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </>
   )
