@@ -1,8 +1,11 @@
+import { Link } from "react-router";
 
 
 
-const PostCard = ({_id,title,content,createdAt,blogImage,author}) => {
-  console.log(author)
+const PostCard = ({blogId,title,content,createdAt,blogImage,author,authorId}) => {
+  
+  
+  
 
   function formatDate(createdAt){
     
@@ -25,6 +28,14 @@ const PostCard = ({_id,title,content,createdAt,blogImage,author}) => {
    
     return finalDate
   }
+
+  function excerptContent(text){
+    if(text.length <150 ) return text;
+    
+    return text.substring(0,150) + "..."
+  }
+
+ 
 
 
   return (
@@ -52,15 +63,15 @@ const PostCard = ({_id,title,content,createdAt,blogImage,author}) => {
             {title}
           </p>
           <p className="text-gray-600"
-          dangerouslySetInnerHTML={{ __html: content }}>
+          dangerouslySetInnerHTML={{ __html: excerptContent(content) }}>
            
           </p>
         </div>
 
         {/* Button */}
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+        <Link to={`blogs/${blogId}`} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
           See More
-        </button>
+        </Link>
       </div>
     </div>
   );

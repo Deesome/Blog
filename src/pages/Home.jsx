@@ -23,19 +23,24 @@ function Home() {
     fetchBlogs()
 
   },[])
-
   console.log(blogs)
+
+
+ 
 
   return (
     <>
      {blogs.length > 0 && 
   blogs.map((blog) => (
+    
     <PostCard key={blog._id}
+     blogId = {blog._id}
      title = {blog.title}
      content = {blog.content}
      blogImage = {blog.blogImage}
      createdAt={blog.createdAt}
      author = {blog.author.userName}
+     authorId = {blog.author._id}
       />
   ))
 }

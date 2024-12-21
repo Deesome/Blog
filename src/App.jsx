@@ -9,6 +9,10 @@ import Home from "./pages/Home"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Create from "./pages/Create"
+import IndividualBlog from "./pages/IndividualBlog"
+import Edit from "./pages/Edit"
+
+
 
 
 const router = createBrowserRouter([
@@ -35,7 +39,17 @@ const router = createBrowserRouter([
       {
         path : "/create",
         element : <Create/>
+      },
+      {
+        path : "/blogs/:id",
+        element : <IndividualBlog/>
+      },
+      {
+        path : "/blogs/:id/edit",
+        element: <Edit/>
       }
+      
+      
     ]
   }
 ])
